@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class Movimiento : MonoBehaviour
 {
+    private Rigidbody rb;
+
     [Serialize]
     public int speed = 5;
+    public int jumpForce = 5;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -40,8 +43,10 @@ public class Movimiento : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.Space))
         {
-            //transform.position += Time.deltaTime * Vector3.up * speed;
-            this.GetComponent<Rigidbody>().AddForce(transform.up * speed);
+            //this.GetComponent<Rigidbody>().AddForce(transform.up * speed);
+
+            Debug.Log("Espacio pulsado");
+            rb.AddForce(new Vector3(0, jumpForce, 0));
         }
     }
 }
