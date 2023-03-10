@@ -5,17 +5,15 @@ using UnityEngine;
 
 public class Movimiento : MonoBehaviour
 {
-    private Rigidbody rb;
-    private bool canJump;
 
     [Serialize]
     public int speed = 5;
     public int jumpForce = 5;
+    public bool canJump;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         canJump = false;
     }
 
@@ -55,10 +53,13 @@ public class Movimiento : MonoBehaviour
 
     void OnCollisionEnter(Collision c)
     {
-        canJump = true;
+        if(c.gameObject.layer==LayerMask.NameToLayer("Ground"))
+        {
+            canJump = true;
+        }
     }
     void OnCollisionExit(Collision c)
     {
-        canJump = true;
+        canJump = false;
     }
 }
