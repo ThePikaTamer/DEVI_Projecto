@@ -41,15 +41,22 @@ public class Movimiento : MonoBehaviour
         {
             transform.position += Time.deltaTime * Vector3.right * speed;
         }
-        else if (Input.GetKeyDown(KeyCode.Space)&&canJump)
+        else if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
             //this.GetComponent<Rigidbody>().AddForce(transform.up * speed);
 
             Debug.Log("Espacio pulsado");
-            this.GetComponent<Rigidbody>().AddForce(Vector3.up*jumpForce);
+            this.GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce);
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag=="Obstacle")
+        {
+            Debug.Log("A");
+        }
+    }
 
     void OnCollisionEnter(Collision c)
     {
@@ -60,6 +67,9 @@ public class Movimiento : MonoBehaviour
     }
     void OnCollisionExit(Collision c)
     {
-        canJump = false;
+        if (c.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            canJump = false;
+        }
     }
 }
