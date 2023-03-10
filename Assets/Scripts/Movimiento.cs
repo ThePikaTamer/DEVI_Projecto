@@ -6,6 +6,7 @@ using UnityEngine;
 public class Movimiento : MonoBehaviour
 {
     private Rigidbody rb;
+    private bool canJump;
 
     [Serialize]
     public int speed = 5;
@@ -15,6 +16,7 @@ public class Movimiento : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        canJump = false;
     }
 
     // Update is called once per frame
@@ -41,12 +43,22 @@ public class Movimiento : MonoBehaviour
         {
             transform.position += Time.deltaTime * Vector3.right * speed;
         }
-        else if (Input.GetKey(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.Space)&&canJump)
         {
             //this.GetComponent<Rigidbody>().AddForce(transform.up * speed);
 
             Debug.Log("Espacio pulsado");
-            rb.AddForce(new Vector3(0, jumpForce, 0));
+            this.GetComponent<Rigidbody>().AddForce(Vector3.up*jumpForce);
         }
+    }
+
+
+    void OnCollisionEnter(Collision c)
+    {
+        canJump = true;
+    }
+    void OnCollisionExit(Collision c)
+    {
+        canJump = true;
     }
 }
