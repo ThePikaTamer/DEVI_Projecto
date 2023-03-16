@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class spawner : MonoBehaviour
+public class bulletControl : MonoBehaviour
 {
-    public Object bullet;
-    [Serialize]
-    public int speed = 5;
-
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(bullet);
+        
     }
 
     // Update is called once per frame
@@ -21,8 +16,13 @@ public class spawner : MonoBehaviour
         
     }
 
-    void movement()
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.tag == "Obstacle")
+        {
+            Debug.Log("A");
+            Destroy(this);
+        }
     }
 }
