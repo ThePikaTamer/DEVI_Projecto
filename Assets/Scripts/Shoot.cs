@@ -21,7 +21,7 @@ public class Shoot : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            GameObject newBullet = Instantiate(bullet);//, tower.transform);
+            GameObject newBullet = Instantiate(bullet, tower.transform);//);
             newBullet.GetComponent<Rigidbody>().AddForce(Vector3.forward * speed);
         }
     }

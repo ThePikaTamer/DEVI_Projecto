@@ -17,12 +17,12 @@ public class bulletControl : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
-        if (other.tag == "Obstacle")
+        if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
         {
             Debug.Log("A");
-            Destroy(this);
+            Destroy(other.gameObject);
         }
     }
 }
